@@ -13,36 +13,31 @@ const circless=document.querySelector('#circles')
 const points=[]
 
 square.addEventListener('click',()=>squareFlag=2)
-pointss.addEventListener('click',()=> flag= 1)
-    
+pointss.addEventListener('click',()=> flag= 1)  
 svg.addEventListener('mousemove',mouseMove)
 
-
-svg.addEventListener('click',(e)=>{
-     if(flag===1){
-        const realNumbers={
-            x:Math.round((e.offsetX/svg.clientWidth)*300),
-            y:Math.round((e.offsetY/svg.clientHeight)*300)
-        }
-        points.push(realNumbers)
-        // console.log(realNumbers)
-        Draw()   
-    }  else if(squareFlag=2){
+svg.addEventListener('click',clicks);
+    function clicks(e){
+        if(flag===1){
             const realNumbers={
-                        x:Math.round((e.offsetX/svg.clientWidth)*300),
-                        y:Math.round((e.offsetY/svg.clientHeight)*300)
-                    } 
-                    squareArray.push(realNumbers)
-                    // console.log(`clicked number ${realNumbers}`)
-                    mouseMove(e)
+                x:Math.round((e.offsetX/svg.clientWidth)*300),
+                y:Math.round((e.offsetY/svg.clientHeight)*300)
+            }
+            points.push(realNumbers)
+            Draw()   
+        }  else if(squareFlag=2){
+                const realNumbers={
+                            x:Math.round((e.offsetX/svg.clientWidth)*300),
+                            y:Math.round((e.offsetY/svg.clientHeight)*300)
+                        } 
+                        squareArray.push(realNumbers)
+                        mouseMove(e)
+        }
+        else{
+            console.log('sahhil')
+        }
     }
-    else{
-        console.log('sahhil')
-    }
- 
-})
-
-
+     
 function Draw(){
     let d;
     circles.innerHTML='';
@@ -56,7 +51,6 @@ function Draw(){
         drawCircle(points[i].x,points[i].y,i)
     }
 }
-
 
 function drawCircle(x,y,i){
     
@@ -93,15 +87,11 @@ function mouseMove(e){
 
  function DrawRectangle(){
     if(squareFlag===2){
-        // console.log('draw rectangel')
      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
  group.innerHTML=''
-//  console.log('map is not working')
 console.log(moveSquare)
 console.log(squareArray)
      squareArray.map(element=>{
-        // console.log(element)
-        // console.log(`shahil ${element}`)
         rect.setAttribute('x',element.x)
         rect.setAttribute('y',element.y)
      })
@@ -113,6 +103,47 @@ console.log(squareArray)
      group.appendChild(rect)
     }
  }
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
