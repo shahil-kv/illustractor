@@ -6,6 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illustractor</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+       .my-class{
+        stroke: transparent;
+        fill: transparent;
+      }
+      .my-class:hover{
+        fill: yellow !important;
+        cursor: pointer;
+      }
+      .leo{
+        fill: red;
+        stroke: green;
+      }
+    </style>
 </head>
 <body>
 
@@ -80,6 +94,7 @@
       Z" />
 
       <path stroke-width="1" stroke="black" id="path"/>
+      <g id="circles"></g>
       <g id="group"></g>
     </svg>
   <div class="toolButton">
@@ -89,8 +104,8 @@
           </svg>
     </button>
     <button id="square">Square</button>
-    <button>Points</button>
-    <button>Move</button>
+    <button id="points">Points</button>
+    <button id="move">Move</button>
   </div>
     
 </div>

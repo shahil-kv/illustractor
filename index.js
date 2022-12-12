@@ -1,89 +1,121 @@
+let squareFlag;
+let flag;
 const svg=document.querySelector('#svgClick')
 const path=document.querySelector('#path')
-const circle=document.querySelector('#circle')
+const circles=document.querySelector('#circles')
 const square=document.querySelector('#square')
+const pointss=document.querySelector('#points')
+const move=document.querySelector('#move')
 let squareArray=[];
 let moveSquare=[]
-let flag=0;
 const group=document.querySelector('#group')
+const circless=document.querySelector('#circles')
 const points=[]
-svg.addEventListener('click',function(e){
-    const realNumbers={
-        x:Math.round((e.offsetX/svg.clientWidth)*300),
-        y:Math.round((e.offsetY/svg.clientHeight)*300)
+
+square.addEventListener('click',()=>squareFlag=2)
+pointss.addEventListener('click',()=> flag= 1)
+    
+svg.addEventListener('mousemove',mouseMove)
+
+
+svg.addEventListener('click',(e)=>{
+     if(flag===1){
+        const realNumbers={
+            x:Math.round((e.offsetX/svg.clientWidth)*300),
+            y:Math.round((e.offsetY/svg.clientHeight)*300)
+        }
+        points.push(realNumbers)
+        // console.log(realNumbers)
+        Draw()   
+    }  else if(squareFlag=2){
+            const realNumbers={
+                        x:Math.round((e.offsetX/svg.clientWidth)*300),
+                        y:Math.round((e.offsetY/svg.clientHeight)*300)
+                    } 
+                    squareArray.push(realNumbers)
+                    // console.log(`clicked number ${realNumbers}`)
+                    mouseMove(e)
     }
-    points.push(realNumbers)
-    Draw()
+    else{
+        console.log('sahhil')
+    }
+ 
 })
+
 
 function Draw(){
     let d;
+    circles.innerHTML='';
     for(i=0;i<points.length;i++){
         if(i===0){
-         d=`M${points[i].x} ${points[i].y}`
+            d=`M${points[i].x} ${points[i].y}`
         }else{
             d+=`L${points[i].x} ${points[i].y}`
         }
         path.setAttribute('d',d)
-
+        drawCircle(points[i].x,points[i].y,i)
     }
 }
 
 
- function DrawRectangle(){
-     const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
- group.innerHTML=''
-     squareArray.map((element)=>{
-        console.log(element)
-        rect.setAttribute('x',element.x)
-        rect.setAttribute('y',element.y)
-     })
-     moveSquare.map((element)=>{
-        rect.setAttribute('width',element.x)
-        rect.setAttribute('height',element.y)
-     })
-      rect.setAttribute('fill','red')
-     group.appendChild(rect)
- }
+function drawCircle(x,y,i){
+    
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('id', `c${i}`);
+    circle.setAttribute('cx',x)
+    circle.setAttribute('cy',y)
+    circle.setAttribute('r',1)
+    circle.classList.add('my-class');
+    circle.setAttribute('stroke','none')
+    circle.setAttribute('fill','none')
+    circles.appendChild(circle)
+    if(i===points.length-1){
+        circle.style.fill='red'
+        circle.style.stroke='green'     
+    }
+    
+}
 
-
-
+// svg.addEventListener('mouseup',()=>(squareFlag=-1))
+ 
 function mouseMove(e){
-    if(flag===1){
+    if(squareFlag===2){
+        // console.log('mosemove')
         const shah={
             x:Math.round((e.offsetX/svg.clientWidth)*300),
             y:Math.round((e.offsetY/svg.clientHeight)*300)
         }
         moveSquare.push(shah)
+        // console.log(`square${moveSquare}`)
          DrawRectangle()
-    }
-   
+    }  
 }
 
-svg.addEventListener('mousedown',()=>{
-    if(flag===1){
-        
+ function DrawRectangle(){
+    if(squareFlag===2){
+        // console.log('draw rectangel')
+     const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
+ group.innerHTML=''
+//  console.log('map is not working')
+console.log(moveSquare)
+console.log(squareArray)
+     squareArray.map(element=>{
+        // console.log(element)
+        // console.log(`shahil ${element}`)
+        rect.setAttribute('x',element.x)
+        rect.setAttribute('y',element.y)
+     })
+     moveSquare.map(element=>{
+        rect.setAttribute('width',element.x)
+        rect.setAttribute('height',element.y)
+     })
+      rect.setAttribute('fill','red')
+     group.appendChild(rect)
     }
-})
-svg.addEventListener('click',(e)=>{
-    if(flag===1){
-        const realNumbers={
-                    x:Math.round((e.offsetX/svg.clientWidth)*300),
-                    y:Math.round((e.offsetY/svg.clientHeight)*300)
-                } 
-                squareArray.push(realNumbers)
-                console.log(squareArray)
-    }
-})
-// svg.addEventListener('mousemove',mousemove)
+ }
 
-square.addEventListener('click',(e)=>{
-  flag=1;
 
-})
-svg.addEventListener('mousemove',mouseMove)
 
-mouseMove()
 
 // function clicks(e){
 //     if(flag===1){
