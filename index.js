@@ -14,7 +14,6 @@ const points=[]
 
 square.addEventListener('click',()=>squareFlag=2)
 pointss.addEventListener('click',()=> flag= 1)  
-svg.addEventListener('mousemove',mouseMove)
 
 svg.addEventListener('click',clicks);
     function clicks(e){
@@ -26,11 +25,12 @@ svg.addEventListener('click',clicks);
             points.push(realNumbers)
             Draw()   
         }  else if(squareFlag=2){
-                const realNumbers={
+            const realNumbers={
                             x:Math.round((e.offsetX/svg.clientWidth)*300),
                             y:Math.round((e.offsetY/svg.clientHeight)*300)
                         } 
                         squareArray.push(realNumbers)
+                        svg.addEventListener('mousemove',mouseMove)
                         mouseMove(e)
         }
         else{
