@@ -52,7 +52,9 @@ svg.addEventListener('click',clicks);
      index= circleId.replace('c','')
      console.log(index)
      svg.addEventListener('mousemove',movingPath)
-     
+     svg.addEventListener('mouseup',()=>{
+        index=-1;
+   })
      console.log('selection is working')
     }
 function movingPath(e){
@@ -64,6 +66,7 @@ function movingPath(e){
     }
   points[index]=realNumbers
   Draw()
+  
 }
      
 function Draw(){
