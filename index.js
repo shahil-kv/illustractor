@@ -24,7 +24,7 @@ svg.addEventListener('click',clicks);
             }
             points.push(realNumbers)
             Draw()   
-        }  else if(squareFlag=2){
+        }  else if(squareFlag===2){
             const realNumbers={
                             x:Math.round((e.offsetX/svg.clientWidth)*300),
                             y:Math.round((e.offsetY/svg.clientHeight)*300)
