@@ -1,7 +1,14 @@
+// square moving
 let squareFlag;
-let flag;
+let squareArray=[];
+let moveSquare=[]
 let moves;
-let index='';
+// for points
+let points=[]
+let flag;
+// dom manipulation
+const group=document.querySelector('#group')
+const circless=document.querySelector('#circles')
 const svg=document.querySelector('#svgClick')
 const circle=document.querySelector('#circle');
 const clear=document.querySelector('#clear')
@@ -10,38 +17,36 @@ const redo=document.querySelector('#redo')
 const path=document.querySelector('#path')
 const circlesCreate=document.querySelector('#circle');
 const square=document.querySelector('#square')
-let ram=0;
 const pointss=document.querySelector('#points')
 const move=document.querySelector('#move')
-let squareArray=[];
+// globbel variables
+let popped;
+let index='';
+// circle
+let circleInd=document.querySelector('#circleInd')
 let circleArray=[]
 let circleArrayMoving=[]
-let popped;
-let moveSquare=[]
-const group=document.querySelector('#group')
-const circless=document.querySelector('#circles')
-let points=[]
-let circleInd=document.querySelector('#circleInd')
 
+// flag setting for each of the buttons
 square.addEventListener('click',()=>squareFlag=2,ram=0,circleInd.innerHTML='')
 pointss.addEventListener('click',()=>{ flag= 1,squareFlag=0,group.innerHTML=''}) 
 move.addEventListener('click',()=>{moves=1,flag=0;}) 
 clear.addEventListener('click',()=>{points=[],Draw()})
 undo.addEventListener('click',()=>{popped=  points.pop() ,Draw()})
-redo.addEventListener('click',()=>{points.unshift(popped) ,Draw()})
+redo.addEventListener('click',()=>{points.push(popped) ,Draw()})
+// creating a circle
 circlesCreate.addEventListener('click',()=>{ram=1,squareFlag=0 })
 
-
+// Main function we used
 svg.addEventListener('click',clicks);
     function clicks(e){
         if(flag===1){
-            const realNumbers={
-                x:Math.round((e.offsetX/svg.clientWidth)*300),
-                y:Math.round((e.offsetY/svg.clientHeight)*300)
-            }
+     const realNumbers={ 
+             x:Math.round((e.offsetX/svg.clientWidth)*300),
+             y:Math.round((e.offsetY/svg.clientHeight)*300) }
             points.push(realNumbers)
             Draw()   
-        }  else if(squareFlag===2){
+        }else if(squareFlag===2){
             const realNumbers={
                             x:Math.round((e.offsetX/svg.clientWidth)*300),
                             y:Math.round((e.offsetY/svg.clientHeight)*300)
@@ -49,17 +54,63 @@ svg.addEventListener('click',clicks);
                         squareArray.push(realNumbers)
                         svg.addEventListener('mousemove',mouseMove)
                         mouseMove(e)
+                      }
+             else if(moves===1){
+              select(e);
+          }
+          else if(ram===1){
+           creatingCricle(e)
         }
-        else if(moves===1){
-            select(e);
+    } 
 
+
+// first is point or path adding
+function Draw(){
+    let d;
+    circless.innerHTML='';
+    for(i=0;i<points.length;i++){
+        if(i===0){
+            d=`M${points[i].x} ${points[i].y}`
+        }else{
+            d+=`L${points[i].x} ${points[i].y}`
         }
-        else if(ram===1){
-          creatingCricle(e)
-        }
+        drawCircle(points[i].x,points[i].y,i)
     }
+    path.setAttribute('d',d)
+}
+// second is drawing a square
+// this is a mouse moving event so each time the x and y will change so we can manipulate our rectangle
+function mouseMove(e){
+    if(squareFlag===2){
+        // console.log('mosemove')
+        const shah={
+            x:Math.round((e.offsetX/svg.clientWidth)*300),
+            y:Math.round((e.offsetY/svg.clientHeight)*300)
+        }
+        moveSquare.push(shah)
+         DrawRectangle()
+    }  
+}
 
-
+ function DrawRectangle(){
+    if(squareFlag===2){
+     const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
+ group.innerHTML=''
+console.log(moveSquare)
+console.log(squareArray)
+     squareArray.map(element=>{
+        rect.setAttribute('x',element.x)
+        rect.setAttribute('y',element.y)
+     })
+     moveSquare.map(element=>{
+        rect.setAttribute('width',element.x)
+        rect.setAttribute('height',element.y)
+     })
+      rect.setAttribute('fill','red')
+     group.appendChild(rect)
+    }
+ }
+// third is our circle making 
     function creatingCricle(e){
         const realNumbers={
             x:Math.round((e.offsetX/svg.clientWidth)*300),
@@ -88,15 +139,15 @@ function MakingCircle(){
             // equation from the website 
             const shahil=((element.x+seperate.x)) 
             const neena=((element.y+seperate.y))
-            const total=shahil-neena;
-           const radius=Math.sqrt(total)
-            circle.setAttribute('r',radius)
+             const total=Math.floor(Math.sqrt(shahil+neena))
+            circle.setAttribute('r',total)
         })
     })
     circle.setAttribute('fill','red')
     console.log(circle)
     circleInd.appendChild(circle)
 }
+// third is changing the postion
 
 
     function select(e){
@@ -122,19 +173,6 @@ function movingPath(e){
   
 }
      
-function Draw(){
-    let d;
-    circless.innerHTML='';
-    for(i=0;i<points.length;i++){
-        if(i===0){
-            d=`M${points[i].x} ${points[i].y}`
-        }else{
-            d+=`L${points[i].x} ${points[i].y}`
-        }
-        drawCircle(points[i].x,points[i].y,i)
-    }
-    path.setAttribute('d',d)
-}
 
 function drawCircle(x,y,i){
     
@@ -156,37 +194,7 @@ function drawCircle(x,y,i){
 
 // svg.addEventListener('mouseup',()=>(squareFlag=-1))
  
-function mouseMove(e){
-    if(squareFlag===2){
-        // console.log('mosemove')
-        const shah={
-            x:Math.round((e.offsetX/svg.clientWidth)*300),
-            y:Math.round((e.offsetY/svg.clientHeight)*300)
-        }
-        moveSquare.push(shah)
-        // console.log(`square${moveSquare}`)
-         DrawRectangle()
-    }  
-}
 
- function DrawRectangle(){
-    if(squareFlag===2){
-     const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
- group.innerHTML=''
-console.log(moveSquare)
-console.log(squareArray)
-     squareArray.map(element=>{
-        rect.setAttribute('x',element.x)
-        rect.setAttribute('y',element.y)
-     })
-     moveSquare.map(element=>{
-        rect.setAttribute('width',element.x)
-        rect.setAttribute('height',element.y)
-     })
-      rect.setAttribute('fill','red')
-     group.appendChild(rect)
-    }
- }
 
 
 
