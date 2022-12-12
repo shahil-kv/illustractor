@@ -3,23 +3,34 @@ let flag;
 let moves;
 let index='';
 const svg=document.querySelector('#svgClick')
+const circle=document.querySelector('#circle');
+const clear=document.querySelector('#clear')
+const undo=document.querySelector('#undo')
+const redo=document.querySelector('#redo')
 const path=document.querySelector('#path')
-const circles=document.querySelector('#circles')
+const circlesCreate=document.querySelector('#circle');
 const square=document.querySelector('#square')
+let ram=0;
 const pointss=document.querySelector('#points')
 const move=document.querySelector('#move')
 let squareArray=[];
+let circleArray=[]
+let circleArrayMoving=[]
+let popped;
 let moveSquare=[]
 const group=document.querySelector('#group')
 const circless=document.querySelector('#circles')
-const points=[]
+let points=[]
+let circleInd=document.querySelector('#circleInd')
 
-square.addEventListener('click',()=>squareFlag=2)
-pointss.addEventListener('click',()=>
-{ flag= 1,squareFlag=0,group.innerHTML=''}) 
-move.addEventListener('click',()=>{
-    moves=1,flag=0;
-}) 
+square.addEventListener('click',()=>squareFlag=2,ram=0,circleInd.innerHTML='')
+pointss.addEventListener('click',()=>{ flag= 1,squareFlag=0,group.innerHTML=''}) 
+move.addEventListener('click',()=>{moves=1,flag=0;}) 
+clear.addEventListener('click',()=>{points=[],Draw()})
+undo.addEventListener('click',()=>{popped=  points.pop() ,Draw()})
+redo.addEventListener('click',()=>{points.unshift(popped) ,Draw()})
+circlesCreate.addEventListener('click',()=>{ram=1,squareFlag=0 })
+
 
 svg.addEventListener('click',clicks);
     function clicks(e){
@@ -43,7 +54,49 @@ svg.addEventListener('click',clicks);
             select(e);
 
         }
+        else if(ram===1){
+          creatingCricle(e)
+        }
     }
+
+
+    function creatingCricle(e){
+        const realNumbers={
+            x:Math.round((e.offsetX/svg.clientWidth)*300),
+            y:Math.round((e.offsetY/svg.clientHeight)*300)
+        } 
+
+        svg.addEventListener('mousemove',circleMove )
+       circleArray.push(realNumbers)
+    }
+    function circleMove(e){
+        const realNumbers={
+            x:Math.round((e.offsetX/svg.clientWidth)*300),
+            y:Math.round((e.offsetY/svg.clientHeight)*300)
+        } 
+      circleArrayMoving.push(realNumbers)
+ MakingCircle()
+    }
+function MakingCircle(){
+    circleInd.innerHTML=''
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle')
+    circleArray.map((element)=>{
+        circle.setAttribute('cx',element.x)
+        circle.setAttribute('cy',element.y)
+        console.log(element)
+        circleArrayMoving.map((seperate)=>{
+            // equation from the website 
+            const shahil=((element.x+seperate.x)) 
+            const neena=((element.y+seperate.y))
+            const total=shahil-neena;
+           const radius=Math.sqrt(total)
+            circle.setAttribute('r',radius)
+        })
+    })
+    circle.setAttribute('fill','red')
+    console.log(circle)
+    circleInd.appendChild(circle)
+}
 
 
     function select(e){
@@ -71,16 +124,16 @@ function movingPath(e){
      
 function Draw(){
     let d;
-    circles.innerHTML='';
+    circless.innerHTML='';
     for(i=0;i<points.length;i++){
         if(i===0){
             d=`M${points[i].x} ${points[i].y}`
         }else{
             d+=`L${points[i].x} ${points[i].y}`
         }
-        path.setAttribute('d',d)
         drawCircle(points[i].x,points[i].y,i)
     }
+    path.setAttribute('d',d)
 }
 
 function drawCircle(x,y,i){
@@ -93,7 +146,7 @@ function drawCircle(x,y,i){
     circle.classList.add('my-class');
     circle.setAttribute('stroke','none')
     circle.setAttribute('fill','none')
-    circles.appendChild(circle)
+    circless.appendChild(circle)
     if(i===points.length-1){
         circle.style.fill='red'
         circle.style.stroke='green'     
@@ -134,22 +187,6 @@ console.log(squareArray)
      group.appendChild(rect)
     }
  }
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
