@@ -1,0 +1,30 @@
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.container {
+  overflow: hidden;
+  position: relative;
+  /* background-color: red; */
+  height: 100vh;
+  width: 100vw;
+}
+.toolButton{
+  position: absolute;
+  top: 220px;
+  left: 70px;
+  /* background-color: red; */
+   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 300px;
+  width: 60px;
+  border-radius: 50px;
+}
+.circle{
+   fill: none;
+   stroke: green;
+   background-color: white;
+}
