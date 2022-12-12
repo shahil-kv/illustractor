@@ -1,5 +1,7 @@
 let squareFlag;
 let flag;
+let moves;
+let index='';
 const svg=document.querySelector('#svgClick')
 const path=document.querySelector('#path')
 const circles=document.querySelector('#circles')
@@ -13,7 +15,11 @@ const circless=document.querySelector('#circles')
 const points=[]
 
 square.addEventListener('click',()=>squareFlag=2)
-pointss.addEventListener('click',()=> flag= 1)  
+pointss.addEventListener('click',()=>
+{ flag= 1,squareFlag=0,group.innerHTML=''}) 
+move.addEventListener('click',()=>{
+    moves=1,flag=0;
+}) 
 
 svg.addEventListener('click',clicks);
     function clicks(e){
@@ -33,10 +39,32 @@ svg.addEventListener('click',clicks);
                         svg.addEventListener('mousemove',mouseMove)
                         mouseMove(e)
         }
-        else{
-            console.log('sahhil')
+        else if(moves===1){
+            select(e);
+
         }
     }
+
+
+    function select(e){
+        let circleId=e.target.id
+        if(!(/c\d/).test(circleId)) return 
+     index= circleId.replace('c','')
+     console.log(index)
+     svg.addEventListener('mousemove',movingPath)
+     
+     console.log('selection is working')
+    }
+function movingPath(e){
+    console.log(e)
+    if(!(index>=0))  return
+    const realNumbers={
+        x:Math.round((e.offsetX/svg.clientWidth)*300),
+        y:Math.round((e.offsetY/svg.clientHeight)*300)
+    }
+  points[index]=realNumbers
+  Draw()
+}
      
 function Draw(){
     let d;
