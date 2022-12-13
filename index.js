@@ -36,8 +36,8 @@ square.addEventListener('click',()=>squareFlag=2)
 pointss.addEventListener('click',()=>{ flag= 1})
 // ,flag=0; 
 move.addEventListener('click',()=>{moves=1})
-clear.addEventListener('click',()=>{points=[],Draw()})
-undo.addEventListener('click',()=>{popped=  points.pop() ,Draw()})
+clear.addEventListener('click',()=>{location.reload(),Draw()})
+undo.addEventListener('click',()=>{popped=points.pop() ,Draw()})
 redo.addEventListener('click',()=>{points.push(popped) ,Draw()})
 // creating a circle
 // ,squareFlag=0 
