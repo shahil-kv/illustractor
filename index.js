@@ -3,6 +3,7 @@ let squareFlag;
 let squareArray=[];
 let moveSquare=[]
 let moves;
+let leomessi;
 // for points
 let points=[]
 let flag;
@@ -93,6 +94,8 @@ function mouseMove(e){
     }  
 }
 
+
+
  function DrawRectangle(){
     if(squareFlag===2){
      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
@@ -118,8 +121,13 @@ console.log(squareArray)
          })
      })
    
-      rect.setAttribute('fill','red')
+      rect.setAttribute('fill','none')
+      rect.setAttribute( 'stroke','black' )
      group.appendChild(rect)
+     svg.addEventListener('mouseup',()=>{
+        squareFlag=0;
+    
+      })
     }
  }
 // third is our circle making 
@@ -138,31 +146,42 @@ console.log(squareArray)
             y:Math.round((e.offsetY/svg.clientHeight)*300)
         } 
       circleArrayMoving.push(realNumbers)
+      
  MakingCircle()
     }
 function MakingCircle(){
-    circleInd.innerHTML=''
-    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle')
-    circleArray.map((element)=>{
-       
-        circle.setAttribute('cx',element.x)
-        circle.setAttribute('cy',element.y)
-    
-        circleArrayMoving.map((seperate)=>{
-            const x1=seperate.x
-            const x2=element.x
-            const y1=element.y
-            const y2=seperate.y
-            // equation from the website 
-           const Radius=Math.floor(Math.sqrt(Math.pow(x2-x1,2)+(y2-y1,2)))
-            circle.setAttribute('r',Radius)
+    if(ram===1){
+        circleInd.innerHTML=''
+        const circle=document.createElementNS('http://www.w3.org/2000/svg','circle')
+        circleArray.map((element)=>{
+           
+            circle.setAttribute('cx',element.x)
+            circle.setAttribute('cy',element.y)
+        
+            circleArrayMoving.map((seperate)=>{
+                const x1=seperate.x
+                const x2=element.x
+                const y1=element.y
+                const y2=seperate.y
+                // equation from the website 
+               const Radius=Math.floor(Math.sqrt(Math.pow(x2-x1,2)+(y2-y1,2)))
+                circle.setAttribute('r',Radius)
+            })
         })
-    })
-    circle.setAttribute('fill','none')
-    circle.setAttribute('stroke','black')
-    console.log(circle)
-    circleInd.appendChild(circle)
+        circle.setAttribute('fill','none')
+        circle.setAttribute('stroke','black')
+
+        console.log(circle)
+        circleInd.appendChild(circle)
+       
+    svg.addEventListener('mouseup',()=>{
+        ram=0;
+    
+      })
+    }
+    
 }
+
 // third is changing the postion
     function select(e){
         let circleId=e.target.id
@@ -208,30 +227,6 @@ function drawCircle(x,y,i){
 
 // svg.addEventListener('mouseup',()=>(squareFlag=-1))
  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

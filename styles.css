@@ -12,8 +12,8 @@ width: 100vw;
 }
 .toolButton{
 position: absolute;
-          height: 300px;
-          width: 70px;
+          height: 400px;
+          width: 80px;
           border-radius: 35px;
           background-color: rgb(255, 255, 255);
           top: 230px;
@@ -73,6 +73,40 @@ position: absolute;
   background-color: white;
 }
 #move:hover{
+  scale: 1.2;
+  background-color: rgba(82, 220, 233, 0.477);
+}
+#clear{
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+}
+#clear:hover{
+  scale: 1.2;
+  background-color: rgba(82, 220, 233, 0.477);
+}
+#undo{
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+}
+#undo:hover{
+  scale: 1.2;
+  background-color: rgba(82, 220, 233, 0.477);
+}
+#redo{
+  background-image: url('redo-svgrepo-com.svg');
+  height: 40px;
+  width: 40px;
+  border: none;
+  border-radius: 50%;
+  background-color: white;
+}
+#redo:hover{
   scale: 1.2;
   background-color: rgba(82, 220, 233, 0.477);
 }
