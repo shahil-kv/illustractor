@@ -154,7 +154,7 @@ function MakingCircle(){
             const y1=element.y
             const y2=seperate.y
             // equation from the website 
-           const Radius=Math.floor(Math.sqrt(Math.pow(x2-x1,2),(y2-y1,2)))
+           const Radius=Math.floor(Math.sqrt(Math.pow(x2-x1,2)+(y2-y1,2)))
             circle.setAttribute('r',Radius)
         })
     })
