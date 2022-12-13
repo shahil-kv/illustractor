@@ -8,6 +8,7 @@ let leomessi;
 let points=[]
 let flag;
 // dom manipulation
+const dark=document.querySelector('#dark')
 const group=document.querySelector('#group')
 const circless=document.querySelector('#circles')
 const svg=document.querySelector('#svgClick')
@@ -44,7 +45,6 @@ circlesCreate.addEventListener('click',()=>{ram=1})
 
 // Main function we used
 svg.addEventListener('click',clicks);
-
     function clicks(e){
         if(flag===1){
      const realNumbers={ 
@@ -70,8 +70,7 @@ svg.addEventListener('click',clicks);
         else{
             console.log('shahil')
         }
-    } 
-
+    }  
 
 // first is point or path adding
 function Draw(){
@@ -87,8 +86,27 @@ function Draw(){
     }
     path.setAttribute('d',d)
 }
+
+function drawCircle(x,y,i){
+    
+    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
+    circle.setAttribute('id', `c${i}`);
+    circle.setAttribute('cx',x)
+    circle.setAttribute('cy',y)
+    circle.setAttribute('r',1)
+    circle.classList.add('my-class');
+    circle.setAttribute('stroke','none')
+    circle.setAttribute('fill','none')
+    circless.appendChild(circle)
+    if(i===points.length-1){
+        circle.style.fill='red'
+        circle.style.stroke='green'     
+    }
+    
+}
 // second is drawing a square
 // this is a mouse moving event so each time the x and y will change so we can manipulate our rectangle
+
 function mouseMove(e){
     if(squareFlag===2){
         // console.log('mosemove')
@@ -101,16 +119,13 @@ function mouseMove(e){
     }  
 }
 
-
-
  function DrawRectangle(){
     if(squareFlag===2){
      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
  group.innerHTML=''
-console.log(moveSquare)
-console.log(squareArray)
+// console.log(moveSquare)
+// console.log(squareArray)
      squareArray.map(clicked=>{
-        console.log(clicked.x)
          const x1=clicked.x
          const y1=clicked.y
         rect.setAttribute('x',clicked.x)
@@ -120,20 +135,17 @@ console.log(squareArray)
             const y2=element.y
             // rect.setAttribute('width',element.x)
             // rect.setAttribute('height',element.y)
-        
             const width=Math.abs((y2-y1))
             const height=Math.abs((x2-x1))
             rect.setAttribute('width',height)
             rect.setAttribute('height',width)
          })
      })
-   
       rect.setAttribute('fill','none')
       rect.setAttribute( 'stroke','black' )
-     group.appendChild(rect)
-     svg.addEventListener('mouseup',()=>{
+      group.appendChild(rect)
+      svg.addEventListener('mouseup',()=>{
         squareFlag=0;
-    
       })
     }
  }
@@ -146,12 +158,14 @@ console.log(squareArray)
 
         svg.addEventListener('mousemove',circleMove )
        circleArray.push(realNumbers)
+    //    point that we have pressed
     }
     function circleMove(e){
         const realNumbers={
             x:Math.round((e.offsetX/svg.clientWidth)*300),
             y:Math.round((e.offsetY/svg.clientHeight)*300)
         } 
+        // moving circle
       circleArrayMoving.push(realNumbers)  
  MakingCircle()
     }
@@ -160,11 +174,9 @@ function MakingCircle(){
     if(ram===1){
         circleInd.innerHTML=''
         const circle=document.createElementNS('http://www.w3.org/2000/svg','circle')
-        circleArray.map((element)=>{
-           
+        circleArray.map((element)=>{        
             circle.setAttribute('cx',element.x)
             circle.setAttribute('cy',element.y)
-        
             circleArrayMoving.map((seperate)=>{
                 const x1=seperate.x
                 const x2=element.x
@@ -212,32 +224,9 @@ function movingPath(e){
   Draw()
   
 }
-     
 
-function drawCircle(x,y,i){
-    
-    const circle=document.createElementNS('http://www.w3.org/2000/svg','circle');
-    circle.setAttribute('id', `c${i}`);
-    circle.setAttribute('cx',x)
-    circle.setAttribute('cy',y)
-    circle.setAttribute('r',1)
-    circle.classList.add('my-class');
-    circle.setAttribute('stroke','none')
-    circle.setAttribute('fill','none')
-    circless.appendChild(circle)
-    if(i===points.length-1){
-        circle.style.fill='red'
-        circle.style.stroke='green'     
-    }
-    
-}
 
 // svg.addEventListener('mouseup',()=>(squareFlag=-1))
- 
-
-
-
-
 
 
 // function clicks(e){
