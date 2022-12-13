@@ -39,6 +39,7 @@ circlesCreate.addEventListener('click',()=>{ram=1,squareFlag=0 })
 
 // Main function we used
 svg.addEventListener('click',clicks);
+
     function clicks(e){
         if(flag===1){
      const realNumbers={ 
@@ -137,10 +138,10 @@ function MakingCircle(){
         console.log(element)
         circleArrayMoving.map((seperate)=>{
             // equation from the website 
-            const shahil=((element.x+seperate.x)) 
-            const neena=((element.y+seperate.y))
-             const total=Math.floor(Math.sqrt(shahil+neena))
-            circle.setAttribute('r',total)
+            const x=((element.x+seperate.x)) 
+            const y=((element.y+seperate.y))
+            const Radius=Math.floor(Math.sqrt(x+y))
+            circle.setAttribute('r',Radius)
         })
     })
     circle.setAttribute('fill','red')
