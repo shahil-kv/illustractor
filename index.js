@@ -99,14 +99,25 @@ function mouseMove(e){
  group.innerHTML=''
 console.log(moveSquare)
 console.log(squareArray)
-     squareArray.map(element=>{
-        rect.setAttribute('x',element.x)
-        rect.setAttribute('y',element.y)
+     squareArray.map(clicked=>{
+        console.log(clicked.x)
+         const x1=clicked.x
+         const y1=clicked.y
+        rect.setAttribute('x',clicked.x)
+        rect.setAttribute('y',clicked.y)
+        moveSquare.map(element=>{
+            const x2=element.x
+            const y2=element.y
+            // rect.setAttribute('width',element.x)
+            // rect.setAttribute('height',element.y)
+        
+            const width=Math.abs((y2-y1))
+            const height=Math.abs((x2-x1))
+            rect.setAttribute('width',height)
+            rect.setAttribute('height',width)
+         })
      })
-     moveSquare.map(element=>{
-        rect.setAttribute('width',element.x)
-        rect.setAttribute('height',element.y)
-     })
+   
       rect.setAttribute('fill','red')
      group.appendChild(rect)
     }
