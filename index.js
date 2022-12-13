@@ -29,14 +29,18 @@ let circleArray=[]
 let circleArrayMoving=[]
 
 // flag setting for each of the buttons
-square.addEventListener('click',()=>squareFlag=2,ram=0,circleInd.innerHTML='')
-pointss.addEventListener('click',()=>{ flag= 1,squareFlag=0,group.innerHTML=''}) 
-move.addEventListener('click',()=>{moves=1,flag=0;}) 
+// ,ram=0,circleInd.innerHTML=''
+square.addEventListener('click',()=>squareFlag=2)
+// ,squareFlag=0,group.innerHTML=''
+pointss.addEventListener('click',()=>{ flag= 1})
+// ,flag=0; 
+move.addEventListener('click',()=>{moves=1})
 clear.addEventListener('click',()=>{points=[],Draw()})
 undo.addEventListener('click',()=>{popped=  points.pop() ,Draw()})
 redo.addEventListener('click',()=>{points.push(popped) ,Draw()})
 // creating a circle
-circlesCreate.addEventListener('click',()=>{ram=1,squareFlag=0 })
+// ,squareFlag=0 
+circlesCreate.addEventListener('click',()=>{ram=1})
 
 // Main function we used
 svg.addEventListener('click',clicks);
@@ -62,6 +66,9 @@ svg.addEventListener('click',clicks);
           }
           else if(ram===1){
            creatingCricle(e)
+        }
+        else{
+            console.log('shahil')
         }
     } 
 
@@ -145,10 +152,10 @@ console.log(squareArray)
             x:Math.round((e.offsetX/svg.clientWidth)*300),
             y:Math.round((e.offsetY/svg.clientHeight)*300)
         } 
-      circleArrayMoving.push(realNumbers)
-      
+      circleArrayMoving.push(realNumbers)  
  MakingCircle()
     }
+
 function MakingCircle(){
     if(ram===1){
         circleInd.innerHTML=''
