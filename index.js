@@ -3,12 +3,11 @@ let squareFlag;
 let squareArray=[];
 let moveSquare=[]
 let moves;
-let leomessi;
+
 // for points
 let points=[]
 let flag;
 // dom manipulation
-const dark=document.querySelector('#dark')
 const group=document.querySelector('#group')
 const circless=document.querySelector('#circles')
 const svg=document.querySelector('#svgClick')
@@ -203,6 +202,7 @@ function MakingCircle(){
 
 // third is changing the postion
     function select(e){
+        
         let circleId=e.target.id
         if(!(/c\d/).test(circleId)) return 
      index= circleId.replace('c','')
