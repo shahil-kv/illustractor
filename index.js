@@ -35,19 +35,17 @@ square.addEventListener('click',()=>squareFlag=2)
 pointss.addEventListener('click',()=>{ flag= 1})
 // ,flag=0; 
 move.addEventListener('click',()=>{
- flag=0;   moves=1 })
+ flag=0;  moves=1 })
 clear.addEventListener('click',()=>{location.reload()})
 undo.addEventListener('click',()=>{popped=points.pop() ,Draw()})
 redo.addEventListener('click',()=>{points.push(popped) ,Draw()})
 // creating a circle
 // ,squareFlag=0 
 circlesCreate.addEventListener('click',()=>{ram=1})
-
 // Main function we used
 svg.addEventListener('click',clicks);
     function clicks(e){
         if(flag===1){
-            console.log('flag')
      const realNumbers={ 
              x:Math.round((e.offsetX/svg.clientWidth)*300),
              y:Math.round((e.offsetY/svg.clientHeight)*300) }
