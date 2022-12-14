@@ -2,8 +2,8 @@
 let squareFlag;
 let squareArray=[];
 let moveSquare=[]
-let moves;
-
+let moves=0;
+let ram=0;
 // for points
 let points=[]
 let flag;
@@ -34,7 +34,7 @@ square.addEventListener('click',()=>squareFlag=2)
 // ,squareFlag=0,group.innerHTML=''
 pointss.addEventListener('click',()=>{ flag= 1})
 // ,flag=0; 
-move.addEventListener('click',()=>{moves=1})
+move.addEventListener('click',()=>moves=1)
 clear.addEventListener('click',()=>{location.reload(),Draw()})
 undo.addEventListener('click',()=>{popped=points.pop() ,Draw()})
 redo.addEventListener('click',()=>{points.push(popped) ,Draw()})
@@ -61,6 +61,7 @@ svg.addEventListener('click',clicks);
                         mouseMove(e)
                       }
              else if(moves===1){
+                console.log('moves')
               select(e);
           }
           else if(ram===1){
@@ -202,8 +203,10 @@ function MakingCircle(){
 
 // third is changing the postion
     function select(e){
-        
+        console.log('selected')   
         let circleId=e.target.id
+        console.log(circleId)
+        console.log(circleId)
         if(!(/c\d/).test(circleId)) return 
      index= circleId.replace('c','')
      console.log(index)
