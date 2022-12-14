@@ -21,7 +21,6 @@ const square=document.querySelector('#square')
 const pointss=document.querySelector('#points')
 const move=document.querySelector('#move')
 // globbel variables
-
 let popped;
 let index='';
 // circle
@@ -30,53 +29,51 @@ let circleArray=[]
 let circleArrayMoving=[]
 // flag setting for each of the buttons
 // ,ram=0,circleInd.innerHTML=''
-square.addEventListener('click',()=>squareFlag=2)
-// ,squareFlag=0,group.innerHTML=''
+
 pointss.addEventListener('click',()=>{ flag= 1})
-// ,flag=0; 
-move.addEventListener('click',()=>{
- flag=0;  moves=1 })
+circlesCreate.addEventListener('click',()=>{ram=1})
+square.addEventListener('click',()=>squareFlag=2)
+move.addEventListener('click',()=>{flag=0;  moves=1 })
 clear.addEventListener('click',()=>{location.reload()})
 undo.addEventListener('click',()=>{popped=points.pop() ,Draw()})
 redo.addEventListener('click',()=>{points.push(popped) ,Draw()})
-// creating a circle
-// ,squareFlag=0 
-circlesCreate.addEventListener('click',()=>{ram=1})
-// Main function we used
+
+// factory function
+function number(e){
+    const realNumbers={
+        x:Math.round((e.offsetX/svg.clientWidth)*300),
+        y:Math.round((e.offsetY/svg.clientHeight)*300)
+    } 
+    return realNumbers;
+}
+
 svg.addEventListener('click',clicks);
-    function clicks(e){
-        if(flag===1){
-     const realNumbers={ 
-             x:Math.round((e.offsetX/svg.clientWidth)*300),
-             y:Math.round((e.offsetY/svg.clientHeight)*300) }
+function clicks(e){
+    if(e.target.id==='c0') return Ending()
+    if(flag===1){
+         const realNumbers= number(e)
             points.push(realNumbers)
             Draw()   
         }else if(squareFlag===2){
-            console.log('squareFlag')
-            const realNumbers={
-                            x:Math.round((e.offsetX/svg.clientWidth)*300),
-                            y:Math.round((e.offsetY/svg.clientHeight)*300)
-                        } 
+                     const realNumbers= number(e)
+                      console.log(realNumbers)
                         squareArray.push(realNumbers)
                         svg.addEventListener('mousemove',mouseMove)
                         mouseMove(e)
                       }
              else if(moves===1){
-                console.log('moves')
-              select(e);
-          }
+                select(e);
+            }
           else if(ram===1){
-            console.log('ram')
            creatingCricle(e)
         }
         else{
-            console.log('shahil')
+            console.log('shahil is a killadi')
+            console.log('shahil is a killadi and everyone')
         }
     }  
-
-// first is point or path adding
-function Draw(){
-    let d;
+    function Draw(){
+        let d;
     circless.innerHTML='';
     for(i=0;i<points.length;i++){
         if(i===0){
@@ -106,17 +103,12 @@ function drawCircle(x,y,i){
     }
     
 }
-// second is drawing a square
-// this is a mouse moving event so each time the x and y will change so we can manipulate our rectangle
 
 function mouseMove(e){
     if(squareFlag===2){
-        // console.log('mosemove')
-        const shah={
-            x:Math.round((e.offsetX/svg.clientWidth)*300),
-            y:Math.round((e.offsetY/svg.clientHeight)*300)
-        }
-        moveSquare.push(shah)
+      const squareMove=number(e)
+      console.log(squareMove)
+        moveSquare.push(squareMove)
          DrawRectangle()
     }  
 }
@@ -124,12 +116,10 @@ function mouseMove(e){
  function DrawRectangle(){
     if(squareFlag===2){
      const rect=document.createElementNS('http://www.w3.org/2000/svg','rect')  
- group.innerHTML=''
-// console.log(moveSquare)
-// console.log(squareArray)
+     group.innerHTML=''
      squareArray.map(clicked=>{
          const x1=clicked.x
-         const y1=clicked.y
+        const y1=clicked.y
         rect.setAttribute('x',clicked.x)
         rect.setAttribute('y',clicked.y)
         moveSquare.map(element=>{
@@ -151,25 +141,16 @@ function mouseMove(e){
       })
     }
  }
-// third is our circle making 
     function creatingCricle(e){
-        const realNumbers={
-            x:Math.round((e.offsetX/svg.clientWidth)*300),
-            y:Math.round((e.offsetY/svg.clientHeight)*300)
-        } 
-
+       const realNumbers=number(e);
+       console.log(realNumbers)
         svg.addEventListener('mousemove',circleMove )
        circleArray.push(realNumbers)
-    //    point that we have pressed
     }
     function circleMove(e){
-        const realNumbers={
-            x:Math.round((e.offsetX/svg.clientWidth)*300),
-            y:Math.round((e.offsetY/svg.clientHeight)*300)
-        } 
-        // moving circle
+       const realNumbers=number(e)
       circleArrayMoving.push(realNumbers)  
- MakingCircle()
+      MakingCircle()
     }
 
 function MakingCircle(){
@@ -184,52 +165,46 @@ function MakingCircle(){
                 const x2=element.x
                 const y1=element.y
                 const y2=seperate.y
-                // equation from the website 
                const Radius=Math.floor(Math.sqrt(Math.pow(x2-x1,2)+(y2-y1,2)))
                 circle.setAttribute('r',Radius)
             })
         })
         circle.setAttribute('fill','none')
         circle.setAttribute('stroke','black')
-
-        console.log(circle)
         circleInd.appendChild(circle)
-       
-    svg.addEventListener('mouseup',()=>{
+        svg.addEventListener('mouseup',()=>{
         ram=0;
-    
       })
-    }
-    
+    }  
 }
-
-// third is changing the postion
-    function select(e){
-      
-            console.log('selected')   
+    function select(e){  
             let circleId=e.target.id
-            console.log(circleId)
-            // console.log(circleId)
             if(!(/c\d/).test(circleId)) return 
          index= circleId.replace('c','')
-         console.log(index)
          svg.addEventListener('mousemove',movingPath)
          svg.addEventListener('mouseup',()=>{
             index=-1;
        })
-         console.log('selection is working')
         }
       
-function movingPath(e){
+  function movingPath(e){
     console.log(e)
     if(!(index>=0))  return
-    const realNumbers={
-        x:Math.round((e.offsetX/svg.clientWidth)*300),
-        y:Math.round((e.offsetY/svg.clientHeight)*300)
-    }
+   const realNumbers=number(e)
+   console.log(realNumbers)
   points[index]=realNumbers
   Draw()
-}
+  }
+ function Ending(){
+    let d=path.getAttribute('d')
+    d+='Z'
+    path.setAttribute('d',d)
+    // console.log(circleArray.length-1)
+    let scn=document.getElementById(`c${points.length-1}`)
+    console.log(scn)
+    scn.style.fill='none'
+    scn.style.stroke='none'
+ }
 
 
 // svg.addEventListener('mouseup',()=>(squareFlag=-1))

@@ -28,6 +28,7 @@ position: absolute;
  fill: none;
  stroke: green;
  background-color: white;
+ cursor: pointer;
 }
 
 #circle{
@@ -44,6 +45,7 @@ position: absolute;
   background-color: rgba(82, 220, 233, 0.477);
 }
 #square{
+  cursor: pointer;
   height: 50px;
   width: 50px;
   border: none;
@@ -55,6 +57,7 @@ position: absolute;
   background-color: rgba(82, 220, 233, 0.477);
 }
 #points{
+  cursor: pointer;
   height: 50px;
   width: 50px;
   background-color: white;
@@ -66,6 +69,7 @@ position: absolute;
   background-color: rgba(82, 220, 233, 0.477);
 }
 #move{
+  cursor: pointer;
   height: 50px;
   width: 50px;
   border: none;
@@ -77,6 +81,7 @@ position: absolute;
   background-color: rgba(82, 220, 233, 0.477);
 }
 #clear{
+  cursor: pointer;
   height: 40px;
   width: 40px;
   border: none;
@@ -88,6 +93,7 @@ position: absolute;
   background-color: rgba(82, 220, 233, 0.477);
 }
 #undo{
+  cursor: pointer;
   height: 40px;
   width: 40px;
   border: none;
@@ -99,6 +105,7 @@ position: absolute;
   background-color: rgba(82, 220, 233, 0.477);
 }
 #redo{
+  cursor: pointer;
   background-image: url('redo-svgrepo-com.svg');
   height: 40px;
   width: 40px;
