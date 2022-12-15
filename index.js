@@ -31,7 +31,7 @@ let circleArrayMoving=[]
 // ,ram=0,circleInd.innerHTML=''
 
 pointss.addEventListener('click',()=>{ flag= 1})
-circlesCreate.addEventListener('click',()=>{ram=1})
+circlesCreate.addEventListener('click',()=>{console.log('circle click'), ram=1})
 square.addEventListener('click',()=>squareFlag=2)
 move.addEventListener('click',()=>{flag=0;  moves=1 })
 clear.addEventListener('click',()=>{location.reload()})
@@ -69,13 +69,13 @@ function clicks(e){
         }
         else{
             console.log('shahil is a killadi')
-            console.log('shahil is a killadi and everyone')
         }
     }  
     function Draw(){
         let d;
     circless.innerHTML='';
     for(i=0;i<points.length;i++){
+
         if(i===0){
             d=`M${points[i].x} ${points[i].y}`
         }else{
@@ -150,6 +150,7 @@ function mouseMove(e){
     function circleMove(e){
        const realNumbers=number(e)
       circleArrayMoving.push(realNumbers)  
+      console.log(circleArray)
       MakingCircle()
     }
 
@@ -178,6 +179,7 @@ function MakingCircle(){
     }  
 }
     function select(e){  
+        console.log('shahil')
             let circleId=e.target.id
             if(!(/c\d/).test(circleId)) return 
          index= circleId.replace('c','')

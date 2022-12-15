@@ -107,10 +107,10 @@ position: absolute;
 #redo{
   cursor: pointer;
   background-image: url('redo-svgrepo-com.svg');
-  height: 40px;
-  width: 40px;
+  height:35px;
+  width: 35px;
   border: none;
-  border-radius: 50%;
+  border-radius: 20%;
   background-color: white;
 }
 #redo:hover{
